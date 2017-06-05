@@ -1,16 +1,14 @@
 [[go-docker-images]]
 = Go Docker images
 
-image:https://travis-ci.org/openshift-s2i/s2i-go.svg?branch=master["Build Status", link="https://travis-ci.org/openshift-s2i/s2i-go"]
-
 This repository contains the source for creating a
 https://github.com/openshift/source-to-image[source-to-image] builder image,
 which be used to create reproducible Docker images from your Go project's
 source code.  The resulting image can be run using https://docker.com[Docker].
 
-For more information about using these images with OpenShift, please see
+For more information about using these images with the Digital Garage, please see
 the official
-https://docs.openshift.org/latest/using_images/s2i_images/php.html[OpenShift
+https://docs.thedigitalgarage.io/using_images/s2i_images/php.html[Digital Garage
 Documentation].
 
 [[versions]]
@@ -21,6 +19,7 @@ Go versions currently supported are:
 * Go 1.4.3
 * Go 1.5.3
 * Go 1.6
+* Go 1.7
 
 The following operating system base images are supported:
 
@@ -32,15 +31,15 @@ The following operating system base images are supported:
 To build a Go builder image, execute:
 
 -------------------------------------------------------
-$ git clone https://github.com/openshift-s2i/s2i-go.git
+$ git clone https://github.com/thedigitalgarage/s2i-go.git
 $ cd s2i-go
-$ make build VERSION=1.4
+$ make build VERSION=1.7
 -------------------------------------------------------
 
 Alternatively, you can pull the CentOS image from Docker Hub via:
 
 --------------------------------------
-$ docker pull openshift/go-14-centos7
+$ docker pull thedigitalgarage/s2i-go:1.7
 --------------------------------------
 
 *Notice: By omitting the `VERSION` parameter, the build/test action will
@@ -53,8 +52,8 @@ There are several sample Go applications included with this repository.  To
 build a simple Go test application using the standalone
 
 ---------------------------------------------------------------------------------
-$ s2i build https://github.com/openshift-s2i/s2i-go.git \
-    --context-dir=1.4/test/test-app openshift/go-14-centos7 go-test-app
+$ s2i build https://github.com/thedigitalgarage/s2i-go.git \
+    --context-dir=1.4/test/test-app thedigitalgarage/s2i-go:1.7 go-test-app
 ---------------------------------------------------------------------------------
 
 The resulting image can be executed using https://docker.com[docker]:
@@ -97,41 +96,3 @@ and test actions performed by the `Makefile`.
 
 * *`s2i/`*: Build scripts which will be injected into the builder image
 and executed during application source code builds.
-
-[[image-name-structure]]
-Image name structure
-~~~~~~~~~~~~~~~~~~~~
-
-[[structure-openshift1-2-3]]
-Structure: openshift/1-2-3
-
-1.  Platform name (lowercase) - go
-2.  Platform version(without dots) - 14
-3.  Base builder image - centos7/rhel7
-
-Examples: `openshift/go-14-centos7`, `openshift/go-14-rhel7`
-
-[[contributing]]
-Contributing
-~~~~~~~~~~~~
-
-Contributions to this project (in the form of bug reports, patches, or pull
-requests) are gratefully accepted by the maintainer.
-
-[[copyright-license]]
-Copyright and License
-~~~~~~~~~~~~~~~~~~~~~
-
-Copyright 2016 by Red Hat, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not
-use this package except in compliance with the License (see the `LICENSE` file
-included in this distribution). You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations under
-the License.
